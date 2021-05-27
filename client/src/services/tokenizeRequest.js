@@ -1,0 +1,1 @@
+export const tokenizeRequest = token => { return { headers: { Authorization: `Bearer ${token}` } } }

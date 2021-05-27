@@ -3,10 +3,10 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import thunk from 'redux-thunk'
 
 // Reducers
-import exampleReducer from './reducers/exampleReducer'
+import userReducer from './reducers/user'
 
 const reducer = combineReducers({
-  example: exampleReducer
+  user: userReducer
   // ...add reducers here
 })
 

@@ -7,11 +7,21 @@ const app = express()
 
 app.use(express.json())
 
-mongoose.connect(config.DB_HOST, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
+mongoose.connect(config.DB_HOST, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex:true })
+
+// Middleware:
+const middleware    = require('./utils/middleware')
+// Extract and check token on request (.ie is user logged in) everytime using /private/* routes
+app.use('/api/private', middleware.getToken)
 
 // Routes
-const example = require('./controllers/example')
-app.use('/api/example', example)
+const auth      = require('./controllers/auth')
+const signup    = require('./controllers/signup')
+const users     = require('./controllers/users')
+
+app.use('/api/auth', auth)
+app.use('/api/signup', signup)
+app.use('/api/private/users', users)
 
 const path = require('path')
 app.use(express.static(path.join(__dirname, 'build')))
@@ -19,5 +29,8 @@ app.use(express.static(path.join(__dirname, 'build')))
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'build', 'index.html'))
 })
+
+app.use(middleware.unknowEndPoint)
+app.use(middleware.errorHandler)
 
 module.exports = app

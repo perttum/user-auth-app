@@ -2,6 +2,7 @@ require('dotenv').config()
 
 let PORT
 let DB_HOST
+const SECRET = process.env.SECRET
 
 switch(process.env.NODE_ENV){
 
@@ -18,4 +19,4 @@ default:
   break
 }
 
-module.exports = { PORT, DB_HOST }
+module.exports = { PORT, DB_HOST, SECRET }

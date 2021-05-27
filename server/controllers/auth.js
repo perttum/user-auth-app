@@ -13,35 +13,18 @@ const login           = require('../utils/login')
 // Login user
 router.post('/', async (req, res) => {
 
+  logger.info('req.body: ', req.body)
   // find the user from DB
   const user = await User.findOne({ username: req.body.username })
 
-  // If User was found and password was submitted
-  let loggedInUser
-  if(user && req.body.password){
-
-    // Check if user license has expired
-    const expiryDate = user.expiryDate
-    if(expiryDate && expiryDate < new Date()){
-      logger.error('User expired!')
-      res.status(401).json({ error: 'Käyttäjälisenssi vanhentunut.' })
-    }
-    else if(!user.active){
-      res.status(401).json({ error: 'Käyttäjätili ei ole aktiivinen.' })
-    }
-    else{
-      loggedInUser = await login(user, req.body.password)
-      if(loggedInUser){
-        res.status(200).json(loggedInUser)
-      }
-      else {
-        logger.error('invalid username or password')
-        res.status(401).json({ error: 'Väärä käyttäjänimi tai salasana.' })
-      }
-    }
-  } else {
-    logger.error('user not found')
-    res.status(401).json({ error: 'Käyttäjänimeä ei löytynyt.' })
+  const loggedInUser = await login(user, req.body.password)
+  if(loggedInUser){
+    logger.info('Logged in: ', loggedInUser)
+    res.status(200).json(loggedInUser)
+  }
+  else {
+    logger.error('invalid username or password')
+    res.status(401).json({ error: 'Invalid username or password.' })
   }
 })
 

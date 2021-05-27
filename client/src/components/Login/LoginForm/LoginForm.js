@@ -1,7 +1,6 @@
 import React from 'react'
-import Login from '../Login'
 
-const LoginForm = () => {
+const LoginForm = ({ handleInput, handleSubmit }) => {
   return(
     <form>
       <div className="input-group">
@@ -13,7 +12,8 @@ const LoginForm = () => {
           id="login-username"
           name="login-username"
           data-testid="login-username"
-        />
+          onChange={handleInput}
+          />
       </div>
       <div className="input-group">
         <label htmlFor="login-password">
@@ -24,9 +24,12 @@ const LoginForm = () => {
           id="login-password"
           name="login-password"
           data-testid="login-password"
+          onChange={handleInput}
         />
       </div>
-      <button>
+      <button
+        onClick={handleSubmit}
+      >
         login
       </button>
     </form>
