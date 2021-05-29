@@ -28,45 +28,45 @@ router.post('/', async (req, res) => {
   }
 })
 
-// Forgot password. Sends password reset mail to user.
-router.post('/forgot', async (req, res) => {
+// // Forgot password. Sends password reset mail to user.
+// router.post('/forgot', async (req, res) => {
 
-  const userEmail = req.body.email
-  const user = await User.findOne({ email: userEmail })
+//   const userEmail = req.body.email
+//   const user = await User.findOne({ email: userEmail })
 
-  if(user){
-    // Create random token for reset request
-    const token = crypto.createHmac('sha256', config.SECRET).digest('hex')
+//   if(user){
+//     // Create random token for reset request
+//     const token = crypto.createHmac('sha256', config.SECRET).digest('hex')
 
-    const newResetToken = {
-      user: user._id,
-      resetPasswordToken: token,
-      // resetPasswordTokenExpires: Date(Date().now + 5000)
-    }
-    const resetToken = new ResetToken(newResetToken)
-    const savedToken = await resetToken.save()
+//     const newResetToken = {
+//       user: user._id,
+//       resetPasswordToken: token,
+//       // resetPasswordTokenExpires: Date(Date().now + 5000)
+//     }
+//     const resetToken = new ResetToken(newResetToken)
+//     const savedToken = await resetToken.save()
 
-    const subject = 'Salasanan vaihtopyyntö - Hierojakoulu App'
-    const mailBody = `
-                      <h1>Sähköpostiisi on pyydetty salasanan nollauslinkki</h1>
-                      <p>Mikäli et ole itse pyytänyt salasanan nollausta, poista tämä viesti.</p>
-                      <p>Klikkaamalla alla olevaa linkkiä pääset syöttämään uuden salasanan:</p>
-                      <a href="https://hierojakoulu.herokuapp.com/reset?token=${token}">
-                        Vaihda salasanasi tästä linkistä.
-                      </a>
-                      <p>terkuin,</p>
-                      <p>Hierojakoulu Robo (älä vastaa minulle :)</p>
-                      `
+//     const subject = 'Salasanan vaihtopyyntö - Hierojakoulu App'
+//     const mailBody = `
+//                       <h1>Sähköpostiisi on pyydetty salasanan nollauslinkki</h1>
+//                       <p>Mikäli et ole itse pyytänyt salasanan nollausta, poista tämä viesti.</p>
+//                       <p>Klikkaamalla alla olevaa linkkiä pääset syöttämään uuden salasanan:</p>
+//                       <a href="https://hierojakoulu.herokuapp.com/reset?token=${token}">
+//                         Vaihda salasanasi tästä linkistä.
+//                       </a>
+//                       <p>terkuin,</p>
+//                       <p>Hierojakoulu Robo (älä vastaa minulle :)</p>
+//                       `
 
-    const sendMailResponse = await mailer.sendMail(userEmail, subject, mailBody)
-    logger.info(`Sent password reset mail to ${userEmail}. Response: ${sendMailResponse}`)
+//     const sendMailResponse = await mailer.sendMail(userEmail, subject, mailBody)
+//     logger.info(`Sent password reset mail to ${userEmail}. Response: ${sendMailResponse}`)
 
-    res.status(200).json(savedToken)
-  } else {
-    logger.error(`User with an email address: ${userEmail} not found.`)
-    res.status(404).json({ error: `User with an email address: ${userEmail} not found.` })
-  }
-})
+//     res.status(200).json(savedToken)
+//   } else {
+//     logger.error(`User with an email address: ${userEmail} not found.`)
+//     res.status(404).json({ error: `User with an email address: ${userEmail} not found.` })
+//   }
+// })
 
 router.get('/reset', async (req, res) => {
 

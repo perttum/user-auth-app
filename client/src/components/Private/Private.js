@@ -1,5 +1,5 @@
 import React from 'react'
-import LogoutButton from '../LogoutButton/LogoutButton'
+import LogoutButton from './LogoutButton/LogoutButton'
 
 // Private page to show after successful login
 

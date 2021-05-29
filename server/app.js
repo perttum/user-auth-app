@@ -11,16 +11,19 @@ mongoose.connect(config.DB_HOST, { useNewUrlParser: true, useUnifiedTopology: tr
 
 // Middleware:
 const middleware    = require('./utils/middleware')
-// Extract and check token on request (.ie is user logged in) everytime using /private/* routes
+
+// Extract and check token on request (.ie is there a user logged in) everytime using /private/* routes
 app.use('/api/private', middleware.getToken)
 
 // Routes
-const auth      = require('./controllers/auth')
-const signup    = require('./controllers/signup')
-const users     = require('./controllers/users')
+const auth            = require('./controllers/auth')
+const signup          = require('./controllers/signup')
+const forgotPassword  = require('./controllers/forgotpassword')
+const users           = require('./controllers/users')
 
 app.use('/api/auth', auth)
 app.use('/api/signup', signup)
+app.use('/api/forgot', forgotPassword)
 app.use('/api/private/users', users)
 
 const path = require('path')

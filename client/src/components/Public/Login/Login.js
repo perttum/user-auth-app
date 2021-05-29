@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import LoginForm from './LoginForm/LoginForm'
 import { useDispatch } from 'react-redux'
-import { loginUser } from '../../reducers/user'
-import { useHistory, Link } from 'react-router-dom'
+import { loginUser } from '../../../reducers/user'
+import { useHistory } from 'react-router-dom'
 
 const Login = () => {
   
@@ -45,7 +45,6 @@ const Login = () => {
       <h2>Login</h2>
       { error && <p>{error}</p>}
       <LoginForm handleInput={handleInput} handleSubmit={submitLogin}/>
-      <Link to="/signup">signup</Link>
     </div>
   )
 }

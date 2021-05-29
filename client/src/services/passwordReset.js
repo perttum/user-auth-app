@@ -1,16 +1,5 @@
 import axios from 'axios'
-const baseUrl = '/api/auth'
-
-export const login = async (userToLogin) => {
-  try{
-    console.log('login service logged in: ', userToLogin)
-    const loggedInUser = await axios.post(baseUrl, userToLogin)
-    return loggedInUser.data
-  } catch(err){
-    console.log('error response at service', err.response.data)
-    return err.response.data
-  }
-}
+const baseUrl = '/api/forgot'
 
 export const getResetToken = async (token) => {
   try{
@@ -45,7 +34,7 @@ export const requestPasswordReset = async (email) => {
     const mail = {
       email: email
     }
-    const response = await axios.post(baseUrl + '/forgot', mail)
+    const response = await axios.post(baseUrl, mail)
     // console.log('response ', response.status)
     return response.status === 200 ? true : false
 

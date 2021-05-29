@@ -1,9 +1,7 @@
 import './App.css'
-import Login from './components/Login/Login'
-import Signup from './components/Signup/Signup'
-import ForgotPassword from './components/ForgotPassword/ForgotPassword'
 import Private from './components/Private/Private'
-import { Route, Switch } from 'react-router-dom'
+import Public from './components/Public/Public'
+// import { Route, Switch } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
 function App() {
@@ -13,7 +11,7 @@ function App() {
   return (
     <>
       <div className="App">
-        <Switch>
+        {/* <Switch>
           <Route path="/signup" exact>
             <Signup/>
           </Route>
@@ -28,7 +26,8 @@ function App() {
           <Route path="/">
               <Login/>
           </Route>
-        </Switch>
+        </Switch> */}
+        { !user ? <Public/> : <Private/>}
       </div>
     </>
   )

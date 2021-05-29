@@ -5,7 +5,7 @@ const resetTokenSchema = mongoose.Schema({
   index: {
     createdAt: {
       type: Date,
-      index: { expireAfterSeconds: 1800 },
+      index: { expireAfterSeconds: 1800 }, // 30 min expiry time
       default: Date.now
     }
   },
@@ -14,7 +14,6 @@ const resetTokenSchema = mongoose.Schema({
     ref: 'User'
   },
   resetPasswordToken: String
-  // resetPasswordTokenExpires: Date
 }, { timestamps: true })
 
 resetTokenSchema.set('toJSON', {
