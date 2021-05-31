@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import Signup from './Signup/Signup'
 import Login from './Login/Login'
 import ForgotPassword from './ForgotPassword/ForgotPassword'
@@ -10,7 +10,7 @@ import { Route, Switch } from 'react-router-dom'
 
 const Public = () => {
   return(
-    <>
+    <div id="public-container">
     <Switch>
       <Route path="/signup" exact>
         <Signup/>
@@ -26,7 +26,7 @@ const Public = () => {
       </Route>
     </Switch>
     <PublicNav/>
-    </>
+    </div>
   )
 }
 

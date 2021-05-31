@@ -42,7 +42,7 @@ const Login = () => {
   
   return(
     <div>
-      <h2>Login</h2>
+      <h1>Login</h1>
       { error && <p>{error}</p>}
       <LoginForm handleInput={handleInput} handleSubmit={submitLogin}/>
     </div>

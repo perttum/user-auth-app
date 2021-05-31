@@ -2,6 +2,7 @@ const router            = require('express').Router()
 const User              = require('../models/user')
 const hashPassword      = require('../utils/hashPassword')
 const logger            = require('../utils/logger')
+// const login             = require('../utils/login')
 
 router.post('/', async (req, res) => {
 
@@ -23,6 +24,7 @@ router.post('/', async (req, res) => {
   const savedUser = new User(newUser)
   await savedUser.save()
 
+  // await login(savedUser, body.password)
   logger.info('New user signed up: ', savedUser)
 
   res.status(200).json(savedUser)

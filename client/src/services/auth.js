@@ -30,10 +30,6 @@ export const resetPassword = async (token, password) => {
       password: password
     }
     await axios.post(baseUrl + '/reset/' + token, pass)
-    // const response = await axios.post(baseUrl + '/reset/' + token, pass)
-    // console.log('response ', response.data)
-    // return response.status === 200 ? true : false
-
   } catch(err){
     console.log('Error at resetPassword() ', err)
   }

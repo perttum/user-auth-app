@@ -1,0 +1,22 @@
+#public-nav{
+  margin-top: 3em;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  max-width: 720px;
+  background: none;
+  border-top: 2px solid $dark-transparent;
+  
+  .public-nav-link{
+    margin: 1em;
+    width: 33%;
+    text-align: center;
+    span{
+      font-size: small;
+      color: $white;
+    }
+    a{
+      text-decoration: none;
+    }
+  }
+}

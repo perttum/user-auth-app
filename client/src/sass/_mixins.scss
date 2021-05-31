@@ -1,0 +1,6 @@
+@mixin red-gradient{
+  background: rgb(172,0,0);
+  background: -moz-radial-gradient(circle, rgba(172,0,0,1) 10%, rgba(103,0,0,1) 95%);
+  background: -webkit-radial-gradient(circle, rgba(172,0,0,1) 10%, rgba(103,0,0,1) 95%);
+  background: radial-gradient(circle, rgba(172,0,0,1) 10%, rgba(103,0,0,1) 95%);
+}

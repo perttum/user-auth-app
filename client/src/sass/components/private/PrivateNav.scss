@@ -1,0 +1,8 @@
+#private-nav{
+  background: $dark-transparent;
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+  width: 100vw;
+  height: $private-navbar-height;
+}

@@ -2,21 +2,22 @@ import React from 'react'
 
 const SendRequestForm = ({ handleInput, handleSubmit, email }) => {
   return(
-    <>
-      <h2>Forgot your password?</h2>
+    <div>
+      <h1>Forgot your password?</h1>
       <form>
-        <label htmlFor="email">
-          Insert the email address you created your accont with
-          and I'll send you a reset link 
-        </label>
-        <input
-          type="email"
-          id="email"
-          data-testid="email"
-          name="email"
-          value={email}
-          onChange={handleInput}
-        />
+        <div className="input-group">
+          <label htmlFor="email">
+            Insert your email address for reset link
+          </label>
+          <input
+            type="email"
+            id="email"
+            data-testid="email"
+            name="email"
+            value={email}
+            onChange={handleInput}
+          />
+        </div>
         <button
           onClick={handleSubmit}
           type="button"
@@ -24,7 +25,7 @@ const SendRequestForm = ({ handleInput, handleSubmit, email }) => {
           Send reset link
         </button>
       </form>
-    </>
+    </div>
   )
 }
 

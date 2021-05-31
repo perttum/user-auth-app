@@ -2,11 +2,11 @@ import React from 'react'
 
 const RequestSuccess = () => {
   return(
-    <div>
-      <h2>Email was sent to you!</h2>
+    <div className="container">
+      <h1>Email was sent to you!</h1>
       <p>
         Check your inbox for instructions to reset your password. It'll usually take couple of 
-        minutes to get to there. Check your trash folder if you can't find the mail.
+        minutes to get to there. Check your trash/spam folder if you can't find the mail.
       </p>
     </div>
   )

@@ -1,0 +1,42 @@
+form{
+  width: 100%;
+  input, button{
+    box-sizing: border-box;
+    width: 100%;
+    font-size: 16px;
+    background: none;
+    border: none;
+    border-bottom: $main-border;
+    // border-radius: $small-radius;
+    padding: 1em;
+    color: $white;
+  }
+  button{
+    width: 50%;
+    background: $black;
+    border-radius: $small-radius;
+    border: none;
+    transition-duration: 0.2s;
+  }
+  button:hover{
+    background: $dark-transparent;
+  }
+  input:focus{
+    outline: none;
+    background: $dark-transparent;
+  }
+  .input-group{
+    margin-bottom: 1.4em;
+    label{
+      display: block;
+      margin-bottom: 0.2em;
+      color: $white;
+      font-size: 0.8em;
+      text-transform: uppercase;
+      // background-color: $dark-transparent;
+      // border-bottom: 1px solid $dark-transparent;
+      padding: 4px;
+    }
+  }
+  
+}
