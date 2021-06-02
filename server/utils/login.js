@@ -29,7 +29,9 @@ const login = async (user, password) => {
   const loggedInUser = {
     token,
     username: user.username,
+    email: user.email,
     userCreated: user.userCreated,
+    id: user._id
   }
   logger.info('Logged in: ', loggedInUser)
   return loggedInUser

@@ -7,7 +7,6 @@ const SignupForm = ({ handleInput, submitForm, username, email, password, passwo
 
   return(
     <form>
-      <h1>Signup</h1>
       <div className="input-group">
         <label htmlFor="signup-username">username:</label>
         <input

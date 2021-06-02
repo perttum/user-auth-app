@@ -7,7 +7,7 @@ const PrivateNav = () => {
       <Link to="/private">
         Home
       </Link>
-      <Link to="/private/account">
+      <Link to="/account">
         Account
       </Link>
       <Link to="/">

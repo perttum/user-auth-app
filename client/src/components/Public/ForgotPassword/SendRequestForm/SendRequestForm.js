@@ -7,7 +7,7 @@ const SendRequestForm = ({ handleInput, handleSubmit, email }) => {
       <form>
         <div className="input-group">
           <label htmlFor="email">
-            Insert your email address for reset link
+            Insert your email for a reset link
           </label>
           <input
             type="email"

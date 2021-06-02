@@ -1,0 +1,7 @@
+PUT http://localhost:3001/api/private/account/60b6654994bb60c610af1f2a
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNsYWNrZXIiLCJpZCI6IjYwYjY2NTQ5OTRiYjYwYzYxMGFmMWYyYSIsImlhdCI6MTYyMjYyODY3Nn0.-uEmC8H9UjdxlfvGAJBAmCVGkr6dvieJBXpFU01xLUY
+Content-Type: application/json
+
+{
+  "password": "password"
+}

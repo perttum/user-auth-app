@@ -4,7 +4,7 @@ const baseUrl = '/api/forgot'
 export const getResetToken = async (token) => {
   try{
     const response = await axios.get(baseUrl + `/reset?token=${token}`)
-    // console.log('response ', response.status)
+    console.log('response ', response.status)
     return response.status === 200 ? true : false
 
   } catch(err){
@@ -13,16 +13,14 @@ export const getResetToken = async (token) => {
   }
 }
 
+
+
 export const resetPassword = async (token, password) => {
   try{
     const pass = {
       password: password
     }
     await axios.post(baseUrl + '/reset/' + token, pass)
-    // const response = await axios.post(baseUrl + '/reset/' + token, pass)
-    // console.log('response ', response.data)
-    // return response.status === 200 ? true : false
-
   } catch(err){
     console.log('Error at resetPassword() ', err)
   }

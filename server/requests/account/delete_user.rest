@@ -1,0 +1,2 @@
+DELETE http://localhost:3001/api/private/account/60b798db06ed8ad86bcedf69
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNsYWNrZXIiLCJpZCI6IjYwYjY2NTQ5OTRiYjYwYzYxMGFmMWYyYSIsImlhdCI6MTYyMjY0NTA2M30.GgeOXq1O_Y7m9PTvQDY_97vBgi9htMPiZ-ZpjAv-G0I

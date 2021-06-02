@@ -21,6 +21,7 @@ router.post('/', async (req, res) => {
     ? newUser.email = body.email
     : res.status(404).json({ error: 'Email is required to signup.' })
 
+  newUser.userCreated = new Date()
   const savedUser = new User(newUser)
   await savedUser.save()
 

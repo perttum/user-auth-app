@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
-import SignupForm from './SignupForm/SignupForm'
-// import SignupSuccess from './SignupSuccess/SignupSuccess'
+import UserForm from '../../common/UserForm/UserForm'
 import { signup } from '../../../services/signup'
 import { loginUser } from '../../../reducers/user'
 import { useHistory } from 'react-router-dom'
@@ -10,7 +9,6 @@ const Signup = () => {
 
   const history = useHistory()
   const dispatch = useDispatch()
-  // const [userCreated, setUserCreated] = useState(true)
 
   const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
@@ -94,12 +92,6 @@ const Signup = () => {
           // If response is undefined there was no error. User logged in.
           !response && history.push('/private')
         })
-      // console.log('response in form: ', response)
-      
-      // setUserCreated(true)
-
-      // Login user
-      // history.push()
       
     } else {
       console.log('form data invalid')
@@ -107,8 +99,9 @@ const Signup = () => {
   }
 
   return(
-    <>
-      <SignupForm
+    <div style={{ width:'80%'}}>
+      <h1>Signup</h1>
+      <UserForm
           handleInput={handleInput}
           submitForm={submitForm}
           username={username}
@@ -117,18 +110,7 @@ const Signup = () => {
           passwordAgain={passwordAgain}
           validationErrors={validationErrors}
         />
-      {/* { !userCreated
-        ? <SignupForm
-          handleInput={handleInput}
-          submitForm={submitForm}
-          username={username}
-          email={email}
-          password={password}
-          passwordAgain={passwordAgain}
-          validationErrors={validationErrors}
-        />
-        : <SignupSuccess/>} */}
-    </>
+    </div>
   )
 }
 

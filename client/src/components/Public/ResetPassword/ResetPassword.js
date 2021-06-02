@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { getResetToken, resetPassword } from '../../../services/auth'
+import { getResetToken, resetPassword } from '../../../services/passwordReset'
 import { Link } from 'react-router-dom'
 import PasswordForm from './PasswordForm/PasswordForm'
 

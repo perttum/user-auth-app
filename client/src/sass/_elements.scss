@@ -12,6 +12,14 @@ html{
       height: 100%;
       width: 100%;
     }
+    
+    h1, h2, h3, h4, h5, h6{
+      color: $black;
+    }
+    button:hover{
+      cursor: pointer;
+    }
+    
     .container{
       width: 80%;
       max-width: 720px;
@@ -28,13 +36,20 @@ html{
       height: 100vh;
       margin: 0 auto;
     }
-    
-    h1, h2, h3, h4, h5, h6{
-      color: $black;
-    }
-    button:hover{
-      cursor: pointer;
-    }
 
+    .card{
+      background-color: $white;
+      color: $black;
+      padding: 1em;
+      border-radius: $small-radius;
+      margin-bottom: 1em;
+      margin-top: 1em;
+      label, input{
+        color: $black;
+      }
+      input{
+        background-color: lightgray;
+      }
+    }
   }
 }

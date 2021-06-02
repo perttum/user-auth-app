@@ -19,8 +19,6 @@ const ForgotPassword = () => {
     e.preventDefault()
     const response = await requestPasswordReset(email)
     response && setRequestSent(true)
-    console.log('response from password reset request: ', response)
-    
   }
   
   return(

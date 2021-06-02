@@ -8,7 +8,7 @@ const mailer          = require('../utils/mailer')
 const hashPassword    = require('../utils/hashPassword')
 const login           = require('../utils/login')
 
-// Forgot password. Sends password reset mail to user.
+// Post reset password request. Sends password reset mail to user.
 router.post('/', async (req, res) => {
 
   const userEmail = req.body.email
@@ -51,6 +51,20 @@ router.post('/', async (req, res) => {
   }
 })
 
+// Check that resetToken exists in DB. Token is passed as a query string.
+// Route is visited by clicking reset link in email
+router.get('/reset', async (req, res) => {
+
+  const token = await ResetToken.findOne({ resetPasswordToken: req.query.token })
+
+  if(token){
+    res.status(200).json({ status: 'token found' })
+  } else{
+    res.status(404).json({ status: 'token expired or missing' })
+  }
+})
+
+// Post new password
 router.post('/reset/:token', async (req, res) => {
 
   const token = req.params.token
@@ -70,7 +84,7 @@ router.post('/reset/:token', async (req, res) => {
     await login(user, newPassword)
     res.status(200).json(user).end()
   } else {
-    res.status(404).json({ error: 'Salasanan vaihtopyyntö vanhentunut.' }).end()
+    res.status(404).json({ error: 'Salasanan vaihtopyyntö vanhentunut.' })
   }
 })
 
