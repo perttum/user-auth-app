@@ -4,9 +4,11 @@ import thunk from 'redux-thunk'
 
 // Reducers
 import userReducer from './reducers/user'
+import notificationReducer from './reducers/notification'
 
 const reducer = combineReducers({
-  user: userReducer
+  user: userReducer,
+  notification: notificationReducer
   // ...add reducers here
 })
 

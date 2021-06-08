@@ -84,7 +84,7 @@ router.post('/reset/:token', async (req, res) => {
     await login(user, newPassword)
     res.status(200).json(user).end()
   } else {
-    res.status(404).json({ error: 'Salasanan vaihtopyyntö vanhentunut.' })
+    res.status(404).json({ error: 'Reset password request has expired.' })
   }
 })
 

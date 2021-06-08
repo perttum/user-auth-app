@@ -9,7 +9,7 @@ router.post('/', async (req, res) => {
   // find the user from DB
   const user = await User.findOne({ username: req.body.username })
 
-  // Login the foud user. If user not found respond with error.
+  // Login the foud user. If user is not found respond with error.
   const loggedInUser = user ? await login(user, req.body.password) : res.status(401).json({ error: 'User not found.' })
 
   if(loggedInUser){

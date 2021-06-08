@@ -1,5 +1,4 @@
 const setUser = (key, item, ttl) => {
-  console.log('item: ', typeof item)
   
   item.expiry = ttl // Time To Live, ie. how long the user stays logged in
   window.localStorage.setItem(key, JSON.stringify(item))

@@ -6,23 +6,23 @@ import { useDispatch, useSelector } from 'react-redux'
 import { updateUser } from '../../../reducers/user'
 import { deleteAccount } from '../../../services/account'
 import { logoutUser } from '../../../reducers/user'
-import { useHistory } from 'react-router-dom'
+import { setNotification } from '../../../reducers/notification'
 import dayjs from 'dayjs'
 
 const Account = () => {
   
   const user = useSelector(state => state.user)
   const dispatch = useDispatch()
-  const history = useHistory()
 
   // const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
+  const [emailErrors, setEmailErrors] = useState([])
   const [password, setPassword] = useState('')
   const [passwordAgain, setPasswordAgain] = useState('')
+  const [passwordErrors, setPasswordErrors] = useState([])
 
   const [deleteUsername, setDeleteUsername] = useState('')
-
-  const [validationErrors, setValidationErrors] = useState([])
+  const [deleteUsernameError, setDeleteUsernameError] = useState('')
 
   useEffect(() => {
     if(user){
@@ -49,94 +49,103 @@ const Account = () => {
         setPasswordAgain(v)
         break
       case 'delete-username':
-        deleteUsername(v)
+        setDeleteUsername(v)
         break
       default: break
     }
   }
 
-  const validateForm = () => {
+  const submitUserInfo = async (e) => {
+    e.preventDefault()
+    if(validateEmail(email)){
+      
+      const newUserInfo = {
+        email: email,
+        id: user.id
+      }
     
-    // Push validation errors in errors array.
-    // If errors array has any items in it (in the end of the function)
-    // there was a problem with the validation.
-    // Returns true if validation went ok, false if not.
+      dispatch(updateUser(user.token, newUserInfo))
+        .then(response => {
+          response === 200
+            ? dispatch(setNotification('User updated', 'Everything went just fine!'))
+            : dispatch(setNotification('Ungh...', 'Something went wrong.'))
+        })
+      
+    }
+  }
 
+  const validateEmail = (email) => {
+    
     const errors = []
-
-    // !username
-    //   ? errors.push('username is required')
-    //   : username.length < 5 && errors.push('username has to be at least 5 characters long')
 
     !email
       ? errors.push('email is required')
-      : !email.includes('@') && errors.push('invalid email address')
-
-    !password
-      ? errors.push('password is required')
-      : password.length < 6 && errors.push('password has to be at leat 6 characters long')
-
-    password !== passwordAgain && errors.push('passwords don\'t match')
+      : (!email.includes('@') || !email.includes('.')) && errors.push('invalid email address')
+    
 
     if(errors.length > 0){
-      setValidationErrors(errors)
+      setEmailErrors(errors)
       return false
     } else {
+      emailErrors.length > 0 && setEmailErrors([])
       return true
     }
   }
 
-  const submitUserInfo = async (e) => {
-    e.preventDefault()
-    const newUserInfo = {
-      email: email,
-      id: user.id
-    }
-    console.log('klik submit user info')
-    dispatch(updateUser(user.token, newUserInfo))
-  }
-
   const submitPasswordChange = async (e) => {
     e.preventDefault()
-    const newPassword = {
-      password: password,
-      id: user.id
+    if(validatePassword(password, passwordAgain)){
+      const newPassword = {
+        password: password,
+        id: user.id
+      }
+      dispatch(updateUser(user.token, newPassword))
+        .then(response => {
+          console.log('response @ update password: ', response)
+          if(response === 200){
+            dispatch(setNotification('Password updated', 'Everything went just fine!'))
+          } else {
+            dispatch(setNotification('Ungh...', 'Something went wrong.'))
+          }
+      })
     }
-    dispatch(updateUser(user.token, newPassword))
+  }
+
+  const validatePassword = (password, passwordAgain) => {
+    
+    const errors = []
+
+    !password || !passwordAgain
+    ? errors.push('Please fill both passwords fields.')
+    : password !== passwordAgain
+      ? errors.push('Passwords don\'t match.')
+      : password.length < 6 && errors.push('Password has to be at least 6 characters long.')
+
+    if(errors.length > 0){
+      setPasswordErrors(errors)
+      return false
+    } else{
+      passwordErrors.length > 0 && setPasswordErrors([])
+      return true
+    }
   }
 
   const submitDeleteAccount = async (e) => {
     e.preventDefault()
-    await deleteAccount(user.token, user.id)
-    dispatch(logoutUser())
-    // history.push('/')
-    
+    if(validateDeleteUsername(deleteUsername)){
+      await deleteAccount(user.token, user.id)
+      dispatch(logoutUser())
+      dispatch(setNotification('Good bye', 'Good to see you go.'))
+    }
   }
 
-  const submitForm = async (e) => {
-    e.preventDefault()
-    if(validateForm()){
-      console.log('form ok! submit!')
-      // const newUser = {
-      //   username: username,
-      //   password: password,
-      //   email: email
-      // }
-      // const response = await signup(newUser)
-      // await signup(newUser)
-
-      // const user = {
-      //   username: username,
-      //   password: password
-      // }
-      // dispatch(loginUser(user))
-      //   .then(response => {
-      //     // If response is undefined there was no error. User logged in.
-      //     !response && history.push('/private')
-      //   })
-      
-    } else {
-      console.log('form data invalid')
+  const validateDeleteUsername = (username) => {
+    if(username !== user.username){
+      setDeleteUsernameError('Incorrect username.')
+      return false
+    } else{
+      deleteUsernameError && setDeleteUsernameError('')
+      return true
     }
   }
   
@@ -147,6 +156,9 @@ const Account = () => {
       
       <div className="card">
         <h2>Update user info</h2>
+        { emailErrors.length > 0
+          && emailErrors.map(e => <p key={e}>{e}</p>)
+        }
         <AccountForm
           email={email}
           handleInput={handleInput}
@@ -156,6 +168,9 @@ const Account = () => {
 
       <div className="card">
         <h2>Change password</h2>
+        { passwordErrors.length > 0
+          && passwordErrors.map(e => <p key={e}>{e}</p>)
+        }
         <PasswordForm
           password={password}
           passwordAgain={passwordAgain}
@@ -166,6 +181,7 @@ const Account = () => {
 
       <div className="card">
         <h2>Delete account</h2>
+        { deleteUsernameError && <p>{deleteUsernameError}</p>}
         <DeleteAccountForm
           handleInput={handleInput}
           deleteUsername={deleteUsername}

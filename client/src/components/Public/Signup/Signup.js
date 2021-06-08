@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import UserForm from '../../common/UserForm/UserForm'
+import SignupForm from './SignupForm/SignupForm'
 import { signup } from '../../../services/signup'
 import { loginUser } from '../../../reducers/user'
 import { useHistory } from 'react-router-dom'
@@ -15,7 +15,7 @@ const Signup = () => {
   const [password, setPassword] = useState('')
   const [passwordAgain, setPasswordAgain] = useState('')
 
-  const [validationErrors, setValidationErrors] = useState([])
+  const [errors, setErrors] = useState([])
 
   const handleInput = (e) => {
     e.preventDefault()
@@ -64,7 +64,7 @@ const Signup = () => {
     password !== passwordAgain && errors.push('passwords don\'t match')
 
     if(errors.length > 0){
-      setValidationErrors(errors)
+      setErrors(errors)
       return false
     } else {
       return true
@@ -81,34 +81,35 @@ const Signup = () => {
         email: email
       }
       // const response = await signup(newUser)
-      await signup(newUser)
-
-      const user = {
-        username: username,
-        password: password
+      const signedUpUser = await signup(newUser)
+      console.log('response at Signup component: ', signedUpUser)
+      if(signedUpUser.response.error){
+        setErrors([signedUpUser.response.error])
+      } else {
+        const user = {
+          username: username,
+          password: password
+        }
+        dispatch(loginUser(user))
+          .then(response => {
+            // If response is undefined there was no error. User logged in.
+            !response && history.push('/private')
+          })
       }
-      dispatch(loginUser(user))
-        .then(response => {
-          // If response is undefined there was no error. User logged in.
-          !response && history.push('/private')
-        })
-      
-    } else {
-      console.log('form data invalid')
     }
   }
 
   return(
     <div style={{ width:'80%'}}>
       <h1>Signup</h1>
-      <UserForm
+      <SignupForm
           handleInput={handleInput}
           submitForm={submitForm}
           username={username}
           email={email}
           password={password}
           passwordAgain={passwordAgain}
-          validationErrors={validationErrors}
+          errors={errors}
         />
     </div>
   )

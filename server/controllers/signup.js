@@ -9,6 +9,9 @@ router.post('/', async (req, res) => {
   const body = req.body
   const newUser = {}
 
+  // The posted data is already validated at client side.
+  // So these body.x checks are basically just paranoia.
+
   body.username
     ? newUser.username = body.username
     : res.status(404).json({ error: 'Username is required to signup.' })
@@ -23,9 +26,13 @@ router.post('/', async (req, res) => {
 
   newUser.userCreated = new Date()
   const savedUser = new User(newUser)
+
+  // savedUser is validated one more time here for uniqueness by mongoose.
+  // If check fails client is sent an ugly message containing fields that
+  // did not pass the check and execution ends here.
   await savedUser.save()
 
-  // await login(savedUser, body.password)
+  // If here, everyhting went fine.
   logger.info('New user signed up: ', savedUser)
 
   res.status(200).json(savedUser)

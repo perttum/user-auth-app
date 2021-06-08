@@ -1,0 +1,21 @@
+#notification{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  background: $dark-transparent;
+  
+  #notification-box{
+    text-align: center;
+    width: 90%;
+    max-width: 400px;
+    background: $white;
+    padding: 1em;
+    border-radius: $small-radius;
+    p{
+      color: $dark-gray;
+    }
+  }
+}

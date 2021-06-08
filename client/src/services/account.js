@@ -7,11 +7,10 @@ export const updateUserData = async (token, userData) => {
   try{
     const config = tokenizeRequest(token)
     const updatedUser = await axios.put(`${baseUrl}/${userData.id}`, userData, config)
-    console.log('updated user: ', updatedUser.data)
     return updatedUser.data
-    
   } catch(err){
-    console.log('Error at updateUser service: ', err)
+    console.log('Error at updateUser service: ', err.response)
+    return null
   }
 }
 
@@ -22,7 +21,7 @@ export const deleteAccount = async (token, userId) => {
     await axios.delete(`${baseUrl}/${userId}`, config)
     return true
   } catch(err){
-    console.log('Error at deleteAccount service: ', err)
+    console.log('Error at deleteAccount service: ', err.response)
     return false
   }
 }

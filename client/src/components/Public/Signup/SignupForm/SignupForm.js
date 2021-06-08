@@ -1,9 +1,9 @@
 import React from 'react'
 
-const SignupForm = ({ handleInput, submitForm, username, email, password, passwordAgain, validationErrors }) => {
+const SignupForm = ({ handleInput, submitForm, username, email, password, passwordAgain, errors }) => {
 
   // Map validation errors, if any
-  const validationErrorMessages = validationErrors && validationErrors.map(err => <p>{err}</p>)
+  const errorMessages = errors && errors.map(err => <p key={err}>{err}</p>)
 
   return(
     <form>
@@ -52,7 +52,7 @@ const SignupForm = ({ handleInput, submitForm, username, email, password, passwo
           />
       </div>
 
-      {validationErrors && validationErrorMessages}
+      {errors && errorMessages}
 
       <button
         id="submit-signup-button"

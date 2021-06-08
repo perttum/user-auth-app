@@ -41,7 +41,7 @@ const Login = () => {
   }
   
   return(
-    <div style={{ minWidth:'50%'}}>
+    <div id="login" style={{ minWidth:'50%'}}>
       <h1>Login</h1>
       { error && <p>{error}</p>}
       <LoginForm handleInput={handleInput} handleSubmit={submitLogin}/>

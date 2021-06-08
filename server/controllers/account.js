@@ -23,15 +23,9 @@ router.put('/:id', async (req, res) => {
     updatedUser = await userToUpdate.save({ new: true })
     logger.info(`Updated password for user: ${updatedUser}`)
 
-    // res.status(200).json(savedUser)
-
   } else {
     updatedUser = await User.findByIdAndUpdate(req.params.id, body, { new: true })
-    logger.info(`Updating user info of: ${updatedUser}`)
-
-    // updatedUser
-    //   ? res.status(200).json(updatedUser)
-    //   : res.status(404).json({ error: 'Couldn\'t find user at update account' })
+    logger.info(`Updated user info of: ${updatedUser}`)
   }
   if(updatedUser){
     // User for token creation
