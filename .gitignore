@@ -4,3 +4,4 @@
 /server/.env
 /server/requests
 /client/.env
+.gitignore
