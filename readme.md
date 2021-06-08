@@ -2,6 +2,13 @@
 
 Server and client base for quickstarting a MERN app.
 
+- Signup users
+- Login / logout
+- Token verification for private routes
+- User data and password update
+- Delete user account
+- Forgot password, sends reset link via email
+
 ## Installation / Usage
 
 1. Clone the project. 
@@ -14,8 +21,8 @@ Server and client base for quickstarting a MERN app.
 
 Declare at least these variables in your server *.env* -file:
 
-LOCAL_PORT - The port in which you like to locally run the server.
-DEV_DB_HOST - Your local Mongo DB
-SECRET - Your super secret
-EMAIL - The email you'd like to send password reset links from
-EMAIL_PASS - Password for the email you are using
+- LOCAL_PORT - The port in which you like to locally run the server.
+- DEV_DB_HOST - Your local Mongo DB
+- SECRET - Your super secret
+- EMAIL - The email you'd like to send password reset links from
+- EMAIL_PASS - Password for the email you are using
