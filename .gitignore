@@ -1,7 +1,0 @@
-/server/node_modules
-/server/.vscode
-/client/node_modules
-/server/.env
-/server/requests
-/client/.env
-.gitignore
